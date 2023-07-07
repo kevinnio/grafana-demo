@@ -1,0 +1,11 @@
+metrics:
+  wal_directory: /tmp/wal
+  global:
+    remote_write:
+      - url: http:/mimir:9090/api/v1/push
+
+integrations:
+  agent:
+    enabled: true
+  statsd_exporter:
+    enabled: true

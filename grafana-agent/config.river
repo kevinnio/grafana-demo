@@ -1,0 +1,18 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+prometheus.exporter.statsd "mds" {
+}
+
+prometheus.scrape "statsd" {
+  targets = prometheus.exporter.statsd.mds.targets
+  forward_to = [prometheus.remote_write.mimir.receiver]
+}
+
+prometheus.remote_write "mimir" {
+  endpoint {
+    url = "http://mimir:9090/api/v1/push"
+  }
+}
